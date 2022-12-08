@@ -1,0 +1,22 @@
+apiVersion: kots.io/v1beta1
+kind: HelmChart
+metadata:
+  name: mocktail
+spec:
+  # chart identifies a matching chart from a .tgz
+  chart:
+    name: mocktail
+    chartVersion: 0.2.1
+
+  # values are used in the customer environment, as a pre-render step
+  # these values will be supplied to helm template
+  values:
+    ingress:
+      enabled: true
+      hostname: repl{{ConfigOption "hostname" }}
+    metrics:
+      enabled: true
+
+  # builder values provide a way to render the chart with all images
+  # and manifests. this is used in replicated to create airgap packages
+  builder: {}

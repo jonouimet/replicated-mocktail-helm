@@ -1,0 +1,30 @@
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: "mocktail"
+  labels:
+    app.kubernetes.io/name: "mocktail"
+    app.kubernetes.io/version: "2.0.3"
+spec:
+  selector:
+    matchLabels:
+     app.kubernetes.io/name: "mocktail"
+  componentKinds:
+    - group: core
+      kind: Service
+    - group: core
+      kind: Ingress
+    - group: apps
+      kind: Deployment
+    - group: apps
+      kind: StatefulSet
+  descriptor:
+    version: "2.0.3"
+    description: "Mocktail is completely free, 11mb, self-hosted, containerized mock server with a dashboard."
+    icons:
+      - src: "https://storage.googleapis.com/diesel-practice-174316.appspot.com/2022-12-08_10-22-12.png"
+        type: "image/png"
+    type: "mocktail"
+    links:
+      - description: Mocktail API Server
+        url: "http://mocktail"
