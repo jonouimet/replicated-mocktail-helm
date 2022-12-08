@@ -16,6 +16,7 @@ spec:
     # Fails on preflight page even though Ingress exists.
     - ingress:
         ingressName: mocktail-ingress
+        namespace: mocktail-replicated
         outcomes:
           - fail:
               message: Mocktail ingress is not working.
@@ -23,6 +24,7 @@ spec:
               message: Mocktail ingress is working.
     - deploymentStatus:
         name: mocktail
+        namespace: mocktail-replicated
         outcomes:
           - fail:
               when: "< 1"

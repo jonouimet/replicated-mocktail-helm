@@ -6,6 +6,7 @@ spec:
   analyzers:
     - deploymentStatus:
         name: mocktail
+        namespace: mocktail-replicated
         outcomes:
           - fail:
               when: "< 1"
