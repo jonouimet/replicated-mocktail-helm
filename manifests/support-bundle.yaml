@@ -11,7 +11,7 @@ spec:
           maxAge: 30d
           maxLines: 10000
     - run:
-        namespace: mocktail-replicated
+        namespace: mocktail-helm
         collectorName: ping-google
         image: flungo/netutils
         command: ["ping"]

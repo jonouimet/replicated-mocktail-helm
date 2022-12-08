@@ -6,7 +6,7 @@ spec:
   analyzers:
     - deploymentStatus:
         name: mocktail
-        namespace: mocktail-replicated
+        namespace: mocktail-helm
         outcomes:
           - fail:
               when: "< 1"
