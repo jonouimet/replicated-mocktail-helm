@@ -1,0 +1,27 @@
+apiVersion: kots.io/v1beta1
+kind: Config
+metadata:
+  name: mocktail
+spec:
+  groups:
+    - name: mocktail
+      title: Mocktail
+      description: Mocktail Defaults
+      items:
+        - name: hostname
+          title: Hostname
+          type: text
+          default: 'mocktail.mycompany.com'
+        - name: admin_username
+          title: Admin Username
+          type: text
+          default: 'admin'
+        - name: admin_password
+          title: Admin Password
+          type: password
+          default: 'password'
+        - name: secret_key
+          title: Secret Key
+          type: password
+          hidden: true
+          value: "{{repl RandomString 40}}"

@@ -1,0 +1,88 @@
+apiVersion: troubleshoot.replicated.com/v1beta1
+kind: Analyzer
+metadata:
+  name: mocktail
+spec:
+  analyzers:
+    # Fails on preflight page even though registry has been added vendor.replicated.com.
+    - imagePullSecret:
+        checkName: Has Access to index.docker.io
+        registryName: index.docker.io
+        outcomes:
+          - fail:
+              message: Cannot pull from index.docker.io
+          - pass:
+              message: Found credentials to pull from index.docker.io
+    # Fails on preflight page even though Ingress exists.
+    - ingress:
+        ingressName: mocktail-ingress
+        outcomes:
+          - fail:
+              message: Mocktail ingress is not working.
+          - pass:
+              message: Mocktail ingress is working.
+    - deploymentStatus:
+        name: mocktail
+        outcomes:
+          - fail:
+              when: "< 1"
+              message: The Mocktail deployment does not have any ready replicas.
+          - pass:
+              when: ">= 1"
+              message: The Mocktail deployment has only a single ready replica.
+    - clusterVersion:
+        outcomes:
+          - fail:
+              when: "< 1.13.0"
+              message: Mocktail requires at Kubernetes 1.13.0 or later, and recommends 1.15.0.
+              uri: https://www.kubernetes.io
+          - warn:
+              when: "< 1.15.0"
+              message: Your cluster meets the minimum version of Kubernetes, but we recommend you update to 1.15.0 or later.
+              uri: https://kubernetes.io
+          - pass:
+              when: ">= 1.15.0"
+              message: Your cluster meets the recommended and required versions of Kubernetes.
+    - containerRuntime:
+        outcomes:
+          - pass:
+              when: "== docker"
+              message: Docker container runtime was found.
+          - fail:
+              message: Did not find Docker container runtime.
+    - storageClass:
+        checkName: Required storage classes
+        storageClassName: "default"
+        outcomes:
+          - fail:
+              message: Could not find a storage class called default.
+          - pass:
+              message: All good on storage classes
+    - distribution:
+        outcomes:
+          - fail:
+              when: "== docker-desktop"
+              message: The application does not support Docker Desktop Clusters
+          - fail:
+              when: "== microk8s"
+              message: The application does not support Microk8s Clusters
+          - fail:
+              when: "== minikube"
+              message: The application does not support Minikube Clusters
+          - pass:
+              when: "== eks"
+              message: EKS is a supported distribution
+          - pass:
+              when: "== gke"
+              message: GKE is a supported distribution
+          - pass:
+              when: "== aks"
+              message: AKS is a supported distribution
+          - pass:
+              when: "== kurl"
+              message: KURL is a supported distribution
+          - pass:
+              when: "== digitalocean"
+              message: DigitalOcean is a supported distribution
+          - warn:
+              message: Unable to determine the distribution of Kubernetes

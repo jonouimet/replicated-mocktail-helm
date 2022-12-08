@@ -1,0 +1,17 @@
+apiVersion: kots.io/v1beta1
+kind: Application
+metadata:
+  name: mocktail
+spec:
+  title: Mocktail
+  icon: https://storage.googleapis.com/diesel-practice-174316.appspot.com/2022-12-08_10-22-12.png
+  releaseNotes: |
+    Version 2.0.3
+  statusInformers:
+    - service/mocktail-svc
+    - deployment/mocktail
+  ports:
+    - serviceName: "mocktail"
+      servicePort: 4000
+      localPort: 4000
+      applicationUrl: "http://mocktail"
