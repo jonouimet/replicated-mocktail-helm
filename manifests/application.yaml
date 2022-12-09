@@ -27,4 +27,4 @@ spec:
     type: "mocktail"
     links:
       - description: Mocktail API Server
-        url: "http://mocktail-svc"
+        url: "http://mocktail"

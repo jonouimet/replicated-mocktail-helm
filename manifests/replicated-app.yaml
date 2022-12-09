@@ -8,10 +8,10 @@ spec:
   releaseNotes: |
     Version 2.0.3
   statusInformers:
-    - service/mocktail-svc
+    - service/mocktail
     - deployment/mocktail
   ports:
-    - serviceName: "mocktail-svc"
+    - serviceName: "mocktail"
       servicePort: 4002
       localPort: 4002
-      applicationUrl: "http://mocktail-svc"
+      applicationUrl: "http://mocktail"
