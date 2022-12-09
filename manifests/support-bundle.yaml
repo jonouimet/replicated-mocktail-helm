@@ -6,7 +6,7 @@ spec:
   collectors:
     - logs:
         selector:
-          - app=mocktail
+          - app=mocktail-svc
         limits:
           maxAge: 30d
           maxLines: 10000
