@@ -12,6 +12,6 @@ spec:
     - deployment/mocktail
   ports:
     - serviceName: "mocktail-svc"
-      servicePort: 4002
-      localPort: 4002
+      servicePort: 4000
+      localPort: 4000
       applicationUrl: "http://mocktail"
